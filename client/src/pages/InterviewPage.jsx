@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import { 
   HelpCircle, 
@@ -28,7 +28,7 @@ const InterviewPage = () => {
     const fetchResumes = async () => {
       try {
         const config = getAuthorizedConfig();
-        const { data } = await axios.get('/api/resumes', config);
+        const { data } = await api.get('/api/resumes', config);
         setResumes(data);
         if (data.length > 0) setSelectedResumeId(data[0].id);
       } catch (err) {
@@ -50,7 +50,7 @@ const InterviewPage = () => {
 
     try {
       const config = getAuthorizedConfig();
-      const { data } = await axios.post('/api/interview', {
+      const { data } = await api.post('/api/interview', {
         resumeText: selectedResume.extractedText,
         targetDescription: selectedResume.targetDescription
       }, config);

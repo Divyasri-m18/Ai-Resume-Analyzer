@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { Upload, File, X, Loader2, Briefcase, FileSearch, FileText } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
@@ -90,7 +90,7 @@ const ResumeUpload = ({ onAnalysisStart, onAnalysisComplete, loading }) => {
       }
 
       // Use relative path since we have proxy or absolute if needed
-      const response = await axios.post('/api/analyze', formData, config);
+      const response = await api.post('/api/analyze', formData, config);
       onAnalysisComplete(response.data.data);
     } catch (err) {
       setError(err.response?.data?.error || 'Analysis failed. Please try again.');

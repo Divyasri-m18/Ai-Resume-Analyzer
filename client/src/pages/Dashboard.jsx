@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
 import { FileText, Calendar, ChevronRight, TrendingUp, AlertCircle, Loader2 } from 'lucide-react';
@@ -15,7 +15,7 @@ const Dashboard = () => {
     const fetchHistory = async () => {
       try {
         const config = getAuthorizedConfig();
-        const { data } = await axios.get('/api/resumes', config);
+        const { data } = await api.get('/api/resumes', config);
         setResumes(data);
       } catch (err) {
         setError('Failed to load history');

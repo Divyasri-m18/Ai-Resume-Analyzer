@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import { 
   LineChart, 
@@ -34,7 +34,7 @@ const SkillGapPage = () => {
     const fetchResumes = async () => {
       try {
         const config = getAuthorizedConfig();
-        const { data } = await axios.get('/api/resumes', config);
+        const { data } = await api.get('/api/resumes', config);
         // Filter only those that have targetDescription (and thus skillGaps)
         const tailoredResumes = data.filter(r => r.targetDescription && r.analysis.skillGaps);
         setResumes(tailoredResumes);
